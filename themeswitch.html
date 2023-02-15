@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>theme switch botton</title>
+
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #switch {
+        position: relative;
+        width: 50px;
+        height: 25px;
+        background-color: rgb(1, 68, 16);
+        border-radius: 30px;
+        border: 1px solid orange;
+        box-sizing: content-box;
+      }
+
+      #swich-img {
+        display: inline-block;
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        top: 0px;
+        left: 0px;
+        border-radius: 30px;
+        transition: 0.5s;
+      }
+
+      .change {
+        right: 0px;
+        top: 0px;
+      }
+
+      .animate {
+        animation-name: a;
+        animation-iteration-count: 10;
+        animation-duration: 300ms;
+        animation-timing-function: ease-in-out;
+      }
+
+      @keyframes a {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="switch" onclick="swichTheme()">
+      <span id="swich-img"
+        ><img
+          alt="."
+          src="./bright.png"
+          width="25px"
+          style="padding: 5px"
+          id="img"
+      /></span>
+    </div>
+
+    <script>
+      let swich = document.getElementById("swich-img");
+      let status = "left";
+
+      function swichTheme() {
+        console.log("clicked");
+        if (status === "left") {
+          swich.style.left = "25px";
+          document.body.style.backgroundColor = "black";
+          status = "right";
+        } else {
+          swich.style.left = "0px";
+          status = "left";
+          document.body.style.backgroundColor = "white";
+        }
+        document.getElementById("img").classList.add("animate");
+
+        setTimeout(() => {
+          document.getElementById("img").classList.remove("animate");
+          if (status === "right") {
+            document.getElementById("img").src = "./dark.png";
+          } else {
+            document.getElementById("img").src = "./bright.png";
+          }
+        }, 300);
+      }
+    </script>
+  </body>
+</html>
